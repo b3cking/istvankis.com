@@ -123,9 +123,9 @@
   .card:focus-visible{outline:2px solid var(--coach-accent);outline-offset:3px}
 
   .card.tech{
-    background:radial-gradient(120% 90% at 12% 8%, var(--tech-card2), transparent 60%), var(--tech-card);
+    background:radial-gradient(115% 92% at 14% 0%, #3a4870, transparent 60%), linear-gradient(158deg,#293356,#20293f);
     color:var(--tech-ink);
-    box-shadow:0 14px 40px rgba(15,20,32,.22);
+    box-shadow:0 16px 44px rgba(15,20,32,.24);
   }
   .card.tech::before{
     content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
@@ -135,9 +135,13 @@
     mask-image:radial-gradient(70% 60% at 85% 15%,#000,transparent 72%);
   }
   .card.coach{
-    background:var(--coach-card);
+    background:linear-gradient(155deg,#ffffff,#eef1f7);
     color:var(--coach-ink);
     box-shadow:0 14px 40px rgba(29,42,66,.10), inset 0 0 0 1px var(--line);
+  }
+  .card.coach::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(58% 52% at 86% 12%, rgba(93,118,191,.18), transparent 70%);
   }
 
   .card > *{position:relative;z-index:1}

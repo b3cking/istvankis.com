@@ -291,16 +291,16 @@
     </a>
   </section>
   <footer class="foot">
-    <p class="foot-line"><span class="hu">A legjobb döntések ritkán születnek egyedül. Tedd meg az első lépést: <a href="https://meet.istvankis.com" target="_blank" rel="noopener" data-talk>beszéljünk</a>, vagy előtte <a href="https://coaching.istvankis.com/#rolam" target="_blank" rel="noopener">ismerj</a> meg jobban.</span><span class="en">The best decisions are rarely made alone. Take the first step, <a href="https://meet.istvankis.com" target="_blank" rel="noopener" data-talk>let’s talk</a> if you feel I can help.</span></p>
+    <p class="foot-line"><span class="hu">A legjobb döntések ritkán születnek egyedül. Tedd meg az első lépést: <a href="https://meet.istvankis.com" target="_blank" rel="noopener" data-layover>beszéljünk</a>, vagy előtte <a href="https://coaching.istvankis.com/#rolam" target="_blank" rel="noopener" data-layover>ismerj</a> meg jobban.</span><span class="en">The best decisions are rarely made alone. Take the first step, <a href="https://meet.istvankis.com" target="_blank" rel="noopener" data-talk>let’s talk</a> if you feel I can help.</span></p>
     <small>© 2026 Kis István</small>
   </footer>
 
-  <div class="modal" id="talk-modal" hidden>
+  <div class="modal" id="layover" hidden>
     <div class="modal__backdrop" data-close></div>
-    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Beszéljünk">
-      <a class="modal__fallback" href="https://meet.istvankis.com" target="_blank" rel="noopener"><span class="hu">Új lapon ↗</span><span class="en">New tab ↗</span></a>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Részletek">
+      <a class="modal__fallback" href="#" target="_blank" rel="noopener"><span class="hu">Új lapon ↗</span><span class="en">New tab ↗</span></a>
       <button class="modal__close" type="button" data-close aria-label="Bezárás">✕</button>
-      <iframe class="modal__frame" title="Beszéljünk" src="about:blank" data-src="https://meet.istvankis.com" loading="lazy"></iframe>
+      <iframe class="modal__frame" title="Részletek" src="about:blank" loading="lazy"></iframe>
     </div>
   </div>
 </main>
@@ -321,16 +321,23 @@
       else if((navigator.language||'').toLowerCase().indexOf('hu')!==0){set('en');}
     }catch(e){}
 
-    /* talk layover */
-    var modal=document.getElementById('talk-modal');
+    /* layover: open a link's target in an in-page iframe overlay */
+    var modal=document.getElementById('layover');
     if(modal){
       var frame=modal.querySelector('.modal__frame');
       var closeBtn=modal.querySelector('.modal__close');
+      var fallback=modal.querySelector('.modal__fallback');
+      var panel=modal.querySelector('.modal__panel');
       var opener=null;
       function openModal(e){
         if(e){e.preventDefault();}
         opener=e&&e.currentTarget;
-        if(frame&&frame.getAttribute('src')!==frame.dataset.src){frame.setAttribute('src',frame.dataset.src);}
+        var url=opener&&opener.getAttribute('href');
+        if(url){
+          if(frame){frame.setAttribute('src',url);}
+          if(fallback){fallback.setAttribute('href',url);}
+          if(panel&&opener.textContent){panel.setAttribute('aria-label',opener.textContent.trim());}
+        }
         modal.hidden=false;
         document.body.style.overflow='hidden';
         if(closeBtn){closeBtn.focus();}
@@ -341,7 +348,7 @@
         if(frame){frame.setAttribute('src','about:blank');}
         if(opener&&opener.focus){opener.focus();}
       }
-      document.querySelectorAll('[data-talk]').forEach(function(a){a.addEventListener('click',openModal);});
+      document.querySelectorAll('[data-layover]').forEach(function(a){a.addEventListener('click',openModal);});
       modal.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',closeModal);});
       document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&!modal.hidden){closeModal();}});
     }

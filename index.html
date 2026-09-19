@@ -189,6 +189,20 @@
   .foot-line a:hover{border-bottom-color:currentColor;color:var(--coach-navy)}
   .foot small{font-size:12px;color:var(--dim);letter-spacing:.01em;margin-top:8px}
 
+  /* ---------- talk modal (layover) ---------- */
+  .modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,28px)}
+  .modal[hidden]{display:none}
+  .modal__backdrop{position:absolute;inset:0;background:rgba(15,20,32,.55);animation:mfade .25s var(--ease) both}
+  .modal__panel{position:relative;width:min(760px,100%);height:min(86vh,820px);background:var(--coach-card);border-radius:20px;overflow:hidden;box-shadow:0 30px 90px rgba(15,20,32,.42);animation:mrise .3s var(--ease) both}
+  .modal__frame{width:100%;height:100%;border:0;display:block;background:var(--coach-card)}
+  .modal__close{position:absolute;top:12px;right:12px;z-index:3;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);cursor:pointer;background:rgba(255,255,255,.94);color:var(--ink);font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}
+  .modal__close:hover{background:#fff;transform:scale(1.06)}
+  .modal__close:focus-visible{outline:2px solid var(--coach-accent);outline-offset:2px}
+  .modal__fallback{position:absolute;left:14px;top:16px;z-index:2;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.04em;color:var(--dim);text-decoration:none}
+  .modal__fallback:hover{color:var(--coach-navy)}
+  @keyframes mfade{from{opacity:0}to{opacity:1}}
+  @keyframes mrise{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
+
   /* language visibility */
   .en{display:none}
   [data-lang="en"] .hu{display:none}
@@ -277,9 +291,18 @@
     </a>
   </section>
   <footer class="foot">
-    <p class="foot-line"><span class="hu">A legjobb döntések ritkán születnek egyedül. Tedd meg az első lépést, <a href="https://meet.istvankis.com" target="_blank" rel="noopener">beszéljünk</a>, ha úgy érzed, segíthetek.</span><span class="en">The best decisions are rarely made alone. Take the first step, <a href="https://meet.istvankis.com" target="_blank" rel="noopener">let’s talk</a> if you feel I can help.</span></p>
+    <p class="foot-line"><span class="hu">A legjobb döntések ritkán születnek egyedül. Tedd meg az első lépést, <a href="https://meet.istvankis.com" target="_blank" rel="noopener" data-talk>beszéljünk</a>, ha úgy érzed, segíthetek.</span><span class="en">The best decisions are rarely made alone. Take the first step, <a href="https://meet.istvankis.com" target="_blank" rel="noopener" data-talk>let’s talk</a> if you feel I can help.</span></p>
     <small>© 2026 Kis István</small>
   </footer>
+
+  <div class="modal" id="talk-modal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Beszéljünk">
+      <a class="modal__fallback" href="https://meet.istvankis.com" target="_blank" rel="noopener"><span class="hu">Új lapon ↗</span><span class="en">New tab ↗</span></a>
+      <button class="modal__close" type="button" data-close aria-label="Bezárás">✕</button>
+      <iframe class="modal__frame" title="Beszéljünk" src="about:blank" data-src="https://meet.istvankis.com" loading="lazy"></iframe>
+    </div>
+  </div>
 </main>
 
 <script>
@@ -297,6 +320,31 @@
       if(saved){set(saved);}
       else if((navigator.language||'').toLowerCase().indexOf('hu')!==0){set('en');}
     }catch(e){}
+
+    /* talk layover */
+    var modal=document.getElementById('talk-modal');
+    if(modal){
+      var frame=modal.querySelector('.modal__frame');
+      var closeBtn=modal.querySelector('.modal__close');
+      var opener=null;
+      function openModal(e){
+        if(e){e.preventDefault();}
+        opener=e&&e.currentTarget;
+        if(frame&&frame.getAttribute('src')!==frame.dataset.src){frame.setAttribute('src',frame.dataset.src);}
+        modal.hidden=false;
+        document.body.style.overflow='hidden';
+        if(closeBtn){closeBtn.focus();}
+      }
+      function closeModal(){
+        modal.hidden=true;
+        document.body.style.overflow='';
+        if(frame){frame.setAttribute('src','about:blank');}
+        if(opener&&opener.focus){opener.focus();}
+      }
+      document.querySelectorAll('[data-talk]').forEach(function(a){a.addEventListener('click',openModal);});
+      modal.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',closeModal);});
+      document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&!modal.hidden){closeModal();}});
+    }
   })();
 </script>
 

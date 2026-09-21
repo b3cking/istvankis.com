@@ -139,49 +139,48 @@
   }
   .card:focus-visible{outline:2px solid var(--coach-accent);outline-offset:3px}
 
-  .card.tech{
+  .card.primary{
     background:radial-gradient(115% 92% at 14% 0%, #3a4870, transparent 60%), linear-gradient(158deg,#293356,#20293f);
     color:var(--tech-ink);
     box-shadow:0 16px 44px rgba(15,20,32,.24);
   }
-  .card.tech::before{
+  .card.primary::before{
     content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-    background-image:linear-gradient(rgba(139,150,255,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(139,150,255,.10) 1px,transparent 1px);
-    background-size:46px 46px;
-    -webkit-mask-image:radial-gradient(70% 60% at 85% 15%,#000,transparent 72%);
-    mask-image:radial-gradient(70% 60% at 85% 15%,#000,transparent 72%);
+    background:
+      radial-gradient(62% 56% at 84% 8%, rgba(139,150,255,.32), transparent 66%),
+      radial-gradient(52% 50% at 8% 98%, rgba(92,148,240,.16), transparent 72%);
   }
-  .card.coach{
+  .card.secondary{
     background:linear-gradient(155deg,#ffffff,#eef1f7);
     color:var(--coach-ink);
     box-shadow:0 14px 40px rgba(29,42,66,.10), inset 0 0 0 1px var(--line);
   }
-  .card.coach::before{
+  .card.secondary::before{
     content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
     background:radial-gradient(58% 52% at 86% 12%, rgba(93,118,191,.18), transparent 70%);
   }
 
   .card > *{position:relative;z-index:1}
   .eyebrow{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;display:inline-flex;align-items:center;gap:9px}
-  .tech .eyebrow{color:var(--tech-accent)}
-  .coach .eyebrow{color:var(--coach-accent)}
+  .primary .eyebrow{color:var(--tech-accent)}
+  .secondary .eyebrow{color:var(--coach-accent)}
   .eyebrow::before{content:"";width:22px;height:1px;background:currentColor;opacity:.6}
 
   .head{margin:0;font-size:clamp(21px,2vw,27px);line-height:1.08;letter-spacing:-.02em}
-  .tech .head{font-family:"Source Serif 4",Georgia,serif;font-weight:500}
-  .coach .head{font-family:"Source Serif 4",Georgia,serif;font-weight:500;color:var(--coach-navy)}
+  .primary .head{font-family:"Source Serif 4",Georgia,serif;font-weight:500}
+  .secondary .head{font-family:"Source Serif 4",Georgia,serif;font-weight:500;color:var(--coach-navy)}
 
   .desc{margin:0;font-size:14.5px;line-height:1.55;max-width:38ch}
-  .tech .desc{color:var(--tech-dim)}
-  .coach .desc{color:var(--coach-dim)}
+  .primary .desc{color:var(--tech-dim)}
+  .secondary .desc{color:var(--coach-dim)}
 
   .go{margin-top:6px;display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
-  .tech .go{color:var(--tech-ink)}
-  .coach .go{color:var(--coach-navy)}
+  .primary .go{color:var(--tech-ink)}
+  .secondary .go{color:var(--coach-navy)}
   .go .arrow{transition:transform .3s var(--ease)}
   .card:hover{transform:translateY(-4px)}
-  .card.tech:hover{box-shadow:0 22px 54px rgba(15,20,32,.30)}
-  .card.coach:hover{box-shadow:0 22px 54px rgba(29,42,66,.16), inset 0 0 0 1px var(--line)}
+  .card.primary:hover{box-shadow:0 22px 54px rgba(15,20,32,.30)}
+  .card.secondary:hover{box-shadow:0 22px 54px rgba(29,42,66,.16), inset 0 0 0 1px var(--line)}
   .card:hover .go .arrow{transform:translateX(5px)}
 
   /* ---------- footer ---------- */
@@ -216,7 +215,7 @@
     .kicker{animation-delay:.05s}.lead{animation-delay:.1s}.bio{animation-delay:.16s}
     .fork{animation:fade 1s var(--ease) .3s both}
     .card{animation:rise .7s var(--ease) both}
-    .card.tech{animation-delay:.36s}.card.coach{animation-delay:.44s}
+    .card.primary{animation-delay:.36s}.card.secondary{animation-delay:.44s}
   }
   @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
   @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -274,22 +273,22 @@
   </svg>
 
   <section class="branches">
-    <a class="card tech" href="https://tech.istvankis.com/" aria-label="Tech & tanácsadás">
-      <h2 class="head"><span class="hu">Technológiai tanácsadás</span><span class="en">Technology consulting</span></h2>
-      <p class="desc">
-        <span class="hu">Segítek jobb rendszereket és erősebb csapatokat építeni. Transzformáció, digitalizáció, AI, csapatkohézió, architektúra, biztonság. A technológia mögött mindig emberek vannak.</span>
-        <span class="en">I help build better systems and stronger teams. Transformation, digitalization, AI, team cohesion, architecture, security. Behind the technology, there are always people.</span>
-      </p>
-      <span class="go"><span class="hu">Tech</span><span class="en">Enter</span><span class="arrow" aria-hidden="true">→</span></span>
-    </a>
-
-    <a class="card coach" href="https://coaching.istvankis.com" aria-label="Coaching & vezetés">
+    <a class="card primary" href="https://coaching.istvankis.com" aria-label="Coaching & vezetés">
       <h2 class="head"><span class="hu">Coaching</span><span class="en">Coaching <span class="only-hu" title="Only available in Hungarian">🇭🇺</span></span></h2>
       <p class="desc">
         <span class="hu">Sokszor magányos a vezetés, de a magánéleti döntések meghozatala sem könnyű, ráadásul ezek sokszor össze is függnek. Coaching keretében tudlak kísérni és támogatni.</span>
         <span class="en">Leadership can be a lonely place, and personal decisions aren't any easier. Often, the two are closely connected. In coaching, I can walk alongside you and support you.</span>
       </p>
       <span class="go"><span class="hu">Coaching</span><span class="en">Enter</span><span class="arrow" aria-hidden="true">→</span></span>
+    </a>
+
+    <a class="card secondary" href="https://tech.istvankis.com/" aria-label="Tech & tanácsadás">
+      <h2 class="head"><span class="hu">Technológiai tanácsadás</span><span class="en">Technology consulting</span></h2>
+      <p class="desc">
+        <span class="hu">Segítek jobb rendszereket és erősebb csapatokat építeni. Transzformáció, digitalizáció, AI, csapatkohézió, architektúra, biztonság. A technológia mögött mindig emberek vannak.</span>
+        <span class="en">I help build better systems and stronger teams. Transformation, digitalization, AI, team cohesion, architecture, security. Behind the technology, there are always people.</span>
+      </p>
+      <span class="go"><span class="hu">Tech</span><span class="en">Enter</span><span class="arrow" aria-hidden="true">→</span></span>
     </a>
   </section>
   <footer class="foot">

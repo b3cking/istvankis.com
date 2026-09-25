@@ -23,7 +23,6 @@
     --coach-dim:#65728c;
     --coach-accent:#3a5794;
 
-    /* slogan keyword hues */
     --c-people:#c15a3c;
     --c-teams:#5a4bd0;
     --c-tech:#1f7a8c;
@@ -50,14 +49,12 @@
     max-width:1180px;margin:0 auto;
   }
 
-  /* ---------- top bar ---------- */
   .topbar{display:flex;align-items:center;justify-content:flex-end;gap:16px}
   .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-family:"Space Mono",monospace;font-size:12px;background:rgba(255,255,255,.5)}
   .lang button{appearance:none;background:transparent;border:0;cursor:pointer;padding:7px 14px;color:var(--dim);letter-spacing:.1em;transition:color .25s,background .25s}
   .lang button[aria-pressed="true"]{background:var(--ink);color:#fff}
   .lang button:focus-visible{outline:2px solid var(--coach-accent);outline-offset:2px}
 
-  /* ---------- centre intro ---------- */
   .intro{
     flex:0 0 auto;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -85,7 +82,6 @@
   .bio{margin:0;max-width:min(90vw,52ch);font-size:clamp(14.5px,1.15vw,16.5px);line-height:1.6;color:var(--dim)}
   .bio .em{font-style:italic;color:#55627a}
 
-  /* ---------- trust bar (experience, logo look) ---------- */
   .trustbar{margin-top:clamp(28px,4.2vh,50px)}
   .trustbar__label{text-align:center;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin:0 0 clamp(22px,3.6vh,44px)}
   .trustbar__logos{max-width:100%}
@@ -102,13 +98,11 @@
   @keyframes logoscroll{to{transform:translateX(-50%)}}
 
 
-  /* ---------- question that branches ---------- */
   .ask{text-align:center;margin-top:clamp(26px,3.5vh,48px)}
   .ask h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:clamp(21px,2.6vw,30px);color:var(--ink);letter-spacing:-.01em;display:inline-block;position:relative}
   .ask .uline{position:absolute;left:-3%;bottom:-.42em;width:106%;height:11px;overflow:visible}
   .ask .uline path{fill:none;stroke:var(--c-people);stroke-width:2.6;stroke-linecap:round;opacity:.85;vector-effect:non-scaling-stroke}
 
-  /* ---------- playful touches ---------- */
   .wave{display:inline-block;transform-origin:72% 78%}
   .lead .w1,.lead .w2,.lead .w3{display:inline-block;transition:transform .28s var(--ease)}
   @media (hover:hover){
@@ -122,13 +116,11 @@
   @keyframes wave{0%,55%,100%{transform:rotate(0)}12%{transform:rotate(16deg)}24%{transform:rotate(-12deg)}36%{transform:rotate(14deg)}48%{transform:rotate(-8deg)}}
   @keyframes draw{to{stroke-dashoffset:0}}
 
-  /* ---------- fork ---------- */
   .fork{display:block;margin:12px auto 16px;width:clamp(150px,22vw,200px);height:auto}
   .fork .l{stroke:var(--coach-accent)}
   .fork .r{stroke:var(--tech-accent)}
   .fork path{fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 
-  /* ---------- branches ---------- */
   .branches{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,2.8vw,36px)}
   .card{
     position:relative;overflow:hidden;
@@ -184,14 +176,12 @@
   .card.secondary:hover{box-shadow:0 22px 54px rgba(29,42,66,.16), inset 0 0 0 1px var(--line)}
   .card:hover .go .arrow{transform:translateX(5px)}
 
-  /* ---------- footer ---------- */
   .foot{margin-top:clamp(22px,3vh,40px);padding-top:22px;border-top:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
   .foot-line{margin:0;font-size:12.5px;line-height:1.65;color:var(--dim);max-width:100%}
   .foot-line a{color:var(--coach-accent);font-weight:600;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
   .foot-line a:hover{border-bottom-color:currentColor;color:var(--coach-navy)}
   .foot small{font-size:12px;color:var(--dim);letter-spacing:.01em;margin-top:8px}
 
-  /* ---------- talk modal (layover) ---------- */
   .modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,28px)}
   .modal[hidden]{display:none}
   .modal__backdrop{position:absolute;inset:0;background:rgba(15,20,32,.55);animation:mfade .25s var(--ease) both}
@@ -205,12 +195,10 @@
   @keyframes mfade{from{opacity:0}to{opacity:1}}
   @keyframes mrise{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
 
-  /* language visibility */
   .en{display:none}
   [data-lang="en"] .hu{display:none}
   [data-lang="en"] .en{display:inline}
 
-  /* cheap one-shot load-in */
   @media (prefers-reduced-motion:no-preference){
     .intro>*{animation:rise .7s var(--ease) both}
     .kicker{animation-delay:.05s}.lead{animation-delay:.1s}.bio{animation-delay:.16s}
@@ -221,12 +209,10 @@
   @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
   @keyframes fade{from{opacity:0}to{opacity:1}}
 
-  /* ---------- mobile ---------- */
   @media (max-width:720px){
     .branches{grid-template-columns:1fr}
     .ask{margin-top:40px;margin-bottom:24px}
     .fork{display:none}
-    /* logos become an auto-scrolling carousel */
     .trustbar__logos{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
     .marquee{flex-wrap:nowrap;justify-content:flex-start;width:max-content;gap:0;animation:logoscroll 24s linear infinite}
     .marquee .logos{display:flex;flex-wrap:nowrap;align-items:center;gap:0 30px;padding-right:30px}
@@ -323,7 +309,6 @@
       else if((navigator.language||'').toLowerCase().indexOf('hu')!==0){set('en');}
     }catch(e){}
 
-    /* layover: open a link's target in an in-page iframe overlay */
     var modal=document.getElementById('layover');
     if(modal){
       var frame=modal.querySelector('.modal__frame');
